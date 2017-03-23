@@ -5,4 +5,15 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+    <string name="input_too_short">Input Too Short</string>
+    <string name="same_teams">Both Teams Have Same Name</string>
+
+    <string-array name="age_groups">
+        <item>Select Age Group</item>
+        <item>9yrs - 10yrs</item>
+        <item>10yrs - 11yrs</item>
+        <item>11yrs - 12yrs</item>
+        <item>12yrs - 13yrs</item>
+    </string-array>
+
 </resources>

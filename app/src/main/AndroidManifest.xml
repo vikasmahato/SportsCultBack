@@ -19,6 +19,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Add_Matches_To_Fixtures"></activity>
     </application>
 
 </manifest>
