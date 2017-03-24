@@ -30,7 +30,7 @@ public class Add_Matches_To_Fixtures extends AppCompatActivity {
     private EditText TeamA_Name_Fixture,TeamB_Name_Fixture,Venue_Fixture,Referee_Fixture;
     private TextView Date_Fixture,Time_Fixture;
     private Spinner age_group_spinner_fixture;
-    private static final String[] age_group_texts = {"Group - 0","Group - A","Group -B","Group - C","Group - D"};
+    private static final String[] age_group_texts = {"Group - 0","Group - A","Group - B","Group - C","Group - D"};
     private static Fixture_Description input_fixture_description;
     private final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
     private String raw_time;
