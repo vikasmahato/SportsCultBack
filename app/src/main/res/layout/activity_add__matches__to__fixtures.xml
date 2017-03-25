@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="in.sportscult.sportscultback.Add_Matches_To_Fixtures">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginLeft="10dip"
+    android:layout_marginRight="10dip">
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Fixture Generation Page"
+        android:gravity="center"
+        android:textSize="20dip"
+        android:textColor="#000"
+        android:padding="5dip"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Age Group : "
+            android:textColor="#000"
+            android:padding="5dip"/>
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/age_group_spinner_fixture"/>
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/TeamA_Name_Fixture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Team A"/>
+
+    <EditText
+        android:id="@+id/TeamB_Name_Fixture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Team B"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/Date_Fixture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="DD/MM/YYYY"
+            android:inputType="date"
+            android:textSize="20dip"
+            android:textColor="#000"
+            android:padding="5dip"
+            android:layout_centerVertical="true"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="PICK DATE"
+            android:onClick="pick_a_date"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/Time_Fixture"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="HH:MM AM"
+            android:inputType="time"
+            android:textSize="20dip"
+            android:textColor="#000"
+            android:paddingLeft="5dip"
+            android:paddingBottom="5dip"
+            android:layout_centerVertical="true"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="PICK TIME"
+            android:onClick="pick_a_time"/>
+
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/Venue_Fixture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Venue"/>
+
+    <EditText
+        android:id="@+id/Referee_Fixture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Referee"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Schedule Match"
+            android:onClick="add_match_to_fixture"
+            android:layout_marginTop="15dip"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/schedule_match_button"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:background="#000"
+            android:layout_below="@+id/schedule_match_button"
+            android:layout_marginTop="10dip"/>
+    </RelativeLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Go to fixtures page"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dip"
+        android:id="@+id/go_to_fixture_editing_page"/>
+
+
+</RelativeLayout>

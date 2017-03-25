@@ -1,0 +1,99 @@
+{
+  "project_info": {
+    "project_number": "379002795203",
+    "firebase_url": "https://sportscult-football-league.firebaseio.com",
+    "project_id": "sportscult-football-league",
+    "storage_bucket": "sportscult-football-league.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:379002795203:android:5441219d68334d66",
+        "android_client_info": {
+          "package_name": "in.sportscult.sportscultapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "379002795203-laorpkihj4fudgapr44o8qnnq6h51l8v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "in.sportscult.sportscultapp",
+            "certificate_hash": "66473f5caa6f9371d2ece45f4649d5c3385ae619"
+          }
+        },
+        {
+          "client_id": "379002795203-09d2iegeac17bpaf19mbb0j1raa2sbio.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMuDUgi4Ppgy5mq5bYWTHwyhKcN2PmaPk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "379002795203-09d2iegeac17bpaf19mbb0j1raa2sbio.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:379002795203:android:aef3cbe008af89b1",
+        "android_client_info": {
+          "package_name": "in.sportscult.sportscultback"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "379002795203-l44pqg9349hlq7l4uk7g9vupq1h6e2ao.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "in.sportscult.sportscultback",
+            "certificate_hash": "66473f5caa6f9371d2ece45f4649d5c3385ae619"
+          }
+        },
+        {
+          "client_id": "379002795203-09d2iegeac17bpaf19mbb0j1raa2sbio.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMuDUgi4Ppgy5mq5bYWTHwyhKcN2PmaPk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "379002795203-09d2iegeac17bpaf19mbb0j1raa2sbio.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
