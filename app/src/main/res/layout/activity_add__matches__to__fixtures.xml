@@ -100,7 +100,8 @@
         android:id="@+id/Venue_Fixture"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Venue"/>
+        android:hint="Venue"
+        android:text="QHub Football Field"/>
 
     <EditText
         android:id="@+id/Referee_Fixture"

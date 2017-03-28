@@ -213,7 +213,7 @@ public class Add_Matches_To_Fixtures extends AppCompatActivity {
             Toast.makeText(this,"Please Select An Age Group",Toast.LENGTH_LONG).show();
             verification_status = false;
         }
-        else if(Time.length()<8 || Date.length()<8){
+        else if(Time.length()<1 || Date.length()<1){
             Toast.makeText(this,"Please Select Proper Date And Time",Toast.LENGTH_LONG).show();
             verification_status = false;
         }
@@ -228,6 +228,7 @@ public class Add_Matches_To_Fixtures extends AppCompatActivity {
     public void GoToFixtureEditingPage(){
         Intent intent = new Intent(this,Fixture_Editing_Page.class);
         intent.putExtra("Age Group Selection",""+age_group_spinner_fixture.getSelectedItemPosition());
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 
