@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Fixtures"
+        android:id="@+id/Page_Title"
         android:gravity="center"
         android:textColor="@color/primaryText"
         android:textSize="20dip"
@@ -35,5 +36,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/recycler_view_for_fixture_editor"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Go TO LIVE MATCH PAGE"
+        android:visibility="gone"
+        android:onClick="go_to_live_match_page"
+        android:id="@+id/specific_for_live_match"/>
 
 </LinearLayout>

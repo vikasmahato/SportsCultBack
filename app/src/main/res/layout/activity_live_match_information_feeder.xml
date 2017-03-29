@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="in.sportscult.sportscultback.LiveMatchInformationFeeder"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <include
+            layout="@layout/live_match_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:background="#000"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="30dip"
+            android:text="Feed Match Details"
+            android:gravity="center"
+            android:layout_marginTop="3dip"
+            android:layout_marginBottom="5dip"/>
+<!--
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Change Start Time : "
+                android:id="@+id/change_start_time_live_match"
+                android:textSize="20dip"
+                android:textColor="@color/primaryText"
+                android:layout_gravity="center_vertical"
+                android:layout_centerVertical="true"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PICK TIME"
+                android:id="@+id/pick_live_match_start_time"
+                android:layout_marginLeft="20dip"
+                android:onClick="PickLiveMatchStartTime"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="07:48P M"
+                android:textColor="@color/primaryText"
+                android:textSize="20dip"
+                android:layout_marginLeft="5dip"
+                android:layout_gravity="center_vertical"
+                android:visibility="gone"
+                android:id="@+id/picked_live_match_start_time"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CHANGE"
+                android:layout_marginLeft="5dip"
+                android:visibility="gone"
+                android:id="@+id/update_live_match_start_time"
+                android:onClick="UpdateLiveMatchStartTime"/>
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/ic_menu_revert"
+                android:layout_gravity="bottom"
+                android:id="@+id/clear_live_match_start_time"
+                android:visibility="gone"
+                android:onClick="ClearLiveMatchStartTime"/>
+        </LinearLayout>
+-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Register A New Goal : "
+                android:textColor="@color/primaryText"
+                android:textSize="20dip"
+                android:layout_centerVertical="true"/>
+            <!--
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="file a goal"
+                android:id="@+id/file_a_goal"
+                android:onClick="File_A_Goal"
+                android:layout_alignParentEnd="true"
+                />
+                -->
+        </RelativeLayout>
+
+        <include
+            layout="@layout/goal_or_red_card_information"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/goal_information_fields"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Register A Substitution : "
+                android:textColor="@color/primaryText"
+                android:textSize="20dip"
+                android:layout_centerVertical="true"/>
+            <!--
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="file a substitution"
+                android:id="@+id/file_a_substitution"
+                android:onClick="File_A_Substitution"
+                android:layout_alignParentEnd="true"/>
+                -->
+        </RelativeLayout>
+
+        <include
+            layout="@layout/substitution_information"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/substitution_information_fields"/>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Register A New Red Card : "
+                android:textColor="@color/primaryText"
+                android:textSize="20dip"
+                android:layout_centerVertical="true"/>
+            <!--
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="file a red card"
+                android:id="@+id/file_a_red_card"
+                android:onClick="File_A_Red_Card"
+                android:layout_alignParentEnd="true"/>
+                -->
+        </RelativeLayout>
+
+        <include
+            layout="@layout/goal_or_red_card_information"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/red_cards_information_fields"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#000">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Conclude Match"
+                android:onClick="conclude_live_match"
+                android:layout_margin="10dip"
+                android:layout_centerHorizontal="true"
+                />
+        </RelativeLayout>
+    </LinearLayout>
+
+</ScrollView>

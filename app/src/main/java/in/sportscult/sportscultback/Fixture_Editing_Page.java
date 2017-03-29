@@ -3,6 +3,7 @@ package in.sportscult.sportscultback;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -51,6 +52,13 @@ public class Fixture_Editing_Page extends AppCompatActivity {
     static Map<String,String> team_profile_pic_download_urls;
 
     @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this,Interface.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY|Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fixture__editing__page);
@@ -79,7 +87,7 @@ public class Fixture_Editing_Page extends AppCompatActivity {
         upcoming_matches_fixture.addOnItemTouchListener(new RecyclerItemClickListener(this, upcoming_matches_fixture, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Toast.makeText(Fixture_Editing_Page.this,"To delete a match, press and hold the item",Toast.LENGTH_SHORT).show();
+                Toast.makeText(Fixture_Editing_Page.this,"Long Press To Delete The Scheduled Match",Toast.LENGTH_SHORT).show();
             }
 
             @Override
