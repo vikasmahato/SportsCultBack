@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <TextView
+        android:id="@+id/individual_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Name Of Player"
+        android:textSize="20dip"
+        android:paddingBottom="5dip"/>
+    <TextView
+        android:id="@+id/individual_contact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Contact Of Player"
+        android:textSize="20dip"
+        />
+    <TextView
+        android:id="@+id/player_jersey"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Jersey Number Of Player"
+        android:textSize="20dip"
+        />
+    <ImageView
+        android:layout_width="300dip"
+        android:layout_height="300dip"
+        android:background="#000000"
+        android:id="@+id/individual_id_proof"/>
+</LinearLayout>

@@ -4,17 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="@dimen/activity_vertical_margin"
     tools:context="in.sportscult.sportscultback.Interface">
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="FIXTURE GENERATION"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:onClick="generate_fixtures" />
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="LIVE MATCH"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:onClick="live_match" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="REGISTRATION"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:onClick="register" />
 
 </LinearLayout>

@@ -2,9 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#C0C0C0"
-    android:layout_marginLeft="5dip"
-    android:layout_marginRight="5dip">
+    android:background="@color/viewBg"
+    android:layout_margin="@dimen/activity_vertical_margin">
 
     <RadioGroup
         android:layout_width="match_parent"
@@ -96,6 +95,7 @@
             android:layout_alignParentEnd="true"/>
 
         <Button
+            style="@style/Widget.AppCompat.Button.Colored"
             android:id="@+id/file_the_input"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
