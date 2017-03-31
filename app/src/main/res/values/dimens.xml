@@ -25,8 +25,8 @@
     <dimen name="card_album_radius">0dp</dimen>
     <dimen name="album_cover_height">160dp</dimen>
     <dimen name="title_padding">10dp</dimen>
-    <dimen name="title">15dp</dimen>
-    <dimen name="title_small">10dp</dimen>
+    <dimen name="title">15sp</dimen>
+    <dimen name="title_small">10sp</dimen>
     <dimen name="sponsors_count_padding_bottom">5dp</dimen>
     <dimen name="secondary_text_size">12sp</dimen>
     <dimen name="ic_sports_overflow_width">20dp</dimen>
