@@ -3,90 +3,100 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/activity_vertical_margin">
 
     <android.support.v7.widget.CardView
         android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margin="@dimen/card_margin"
         android:elevation="3dp"
+        android:background="@color/cardview_light_background"
         card_view:cardCornerRadius="@dimen/card_album_radius">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/activity_vertical_margin">
 
-            <include
-                layout="@layout/team_profile_pica"
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/dash"
+                    android:text="1"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="@dimen/title_height"
+                    android:id="@+id/live_match_teama_goals"/>
+            <TextView
+                android:id="@+id/dash"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <ImageView
-                android:layout_width="15dip"
-                android:layout_height="3dip"
-                android:background="#000"
+                android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:id="@+id/dash"/>
+                android:gravity="center"
+                android:layout_margin="@dimen/activity_vertical_margin"
+                android:text="-"
+                android:textColor="@color/colorAccent"/>
+
+
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="5"
-                android:textSize="30dip"
-                android:layout_centerVertical="true"
-                android:layout_toStartOf="@+id/dash"
-                android:layout_marginEnd="30dp"
-                android:textColor="@color/primaryText"
-                android:id="@+id/live_match_teama_goals"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="3"
-                android:textSize="30dip"
-                android:layout_centerVertical="true"
                 android:layout_toEndOf="@+id/dash"
-                android:layout_marginStart="30dp"
-                android:textColor="@color/primaryText"
+                android:text="1"
+                android:textColor="@color/colorAccent"
+                android:layout_centerVertical="true"
+                android:textSize="@dimen/title_height"
                 android:id="@+id/live_match_teamb_goals"/>
 
+                <include
+                    layout="@layout/team_profile_pica"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_toStartOf="@+id/live_match_teama_goals" />
             <include
                 layout="@layout/team_profile_picb"
+                android:layout_toEndOf="@+id/live_match_teamb_goals"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentEnd="true"/>
 
         </RelativeLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/activity_vertical_margin"
+            android:layout_marginRight="@dimen/activity_vertical_margin"
+            android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="left"
+                android:gravity="start"
                 android:text="Start Time : "
                 android:id="@+id/live_match_start_time"
-                android:textColor="@color/primaryText"
-                android:textSize="20dip"
-                android:padding="5dip"/>
+                android:textColor="@color/secondaryText"
+                android:textSize="@dimen/secondary_text_size" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="right"
+                android:gravity="end"
                 android:text="Group - A"
                 android:id="@+id/live_match_age_group"
-                android:textColor="@color/primaryText"
-                android:textSize="20dip"
-                android:padding="5dip"/>
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:textColor="@color/secondaryText"
+                android:textSize="@dimen/secondary_text_size" />
         </LinearLayout>
         </LinearLayout>
 

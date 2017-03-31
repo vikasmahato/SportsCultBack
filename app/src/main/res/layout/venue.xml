@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/primaryText"
-        android:textSize="@dimen/album_title" />
+        android:textSize="@dimen/title_small" />
     <TextView
         android:id="@+id/time"
         tools:text="00:00 am"
@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/primaryText"
-        android:textSize="@dimen/album_title" />
+        android:textSize="@dimen/title_small" />
     <TextView
         android:id="@+id/venue"
         tools:text="Venue"
@@ -28,10 +28,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/primaryText"
-        android:textSize="@dimen/album_title" />
+        android:textSize="@dimen/title_small" />
     <TextView
         android:id="@+id/referee"
         tools:text="Refree Name"
+        android:textSize="@dimen/title_small"
         android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

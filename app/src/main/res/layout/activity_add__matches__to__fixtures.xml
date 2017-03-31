@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="in.sportscult.sportscultback.Add_Matches_To_Fixtures">
+    android:background="@color/viewBg"
+    android:layout_height="match_parent">
 
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_marginLeft="10dip"
-    android:layout_marginRight="10dip">
+    android:layout_margin="@dimen/activity_vertical_margin">
     <TextView
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Fixture Generation Page"
         android:gravity="center"
-        android:textSize="20dip"
-        android:textColor="#000"
+        android:textSize="@dimen/title_height"
+        android:textColor="@color/colorPrimary"
         android:padding="5dip"/>
 
     <LinearLayout
@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Age Group : "
-            android:textColor="#000"
+            android:textColor="@color/primaryText"
             android:padding="5dip"/>
         <Spinner
             android:layout_width="match_parent"
@@ -67,6 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:text="PICK DATE"
             android:onClick="pick_a_date"/>
 
@@ -92,6 +93,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:text="PICK TIME"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:onClick="pick_a_time"/>
 
     </RelativeLayout>
@@ -117,6 +119,7 @@
             android:layout_height="wrap_content"
             android:text="Schedule Match"
             android:onClick="add_match_to_fixture"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_marginTop="15dip"
             android:layout_centerHorizontal="true"
             android:id="@+id/schedule_match_button"/>
@@ -124,21 +127,21 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="1dip"
-            android:background="#000"
+            android:background="@color/cardview_light_background"
             android:layout_below="@+id/schedule_match_button"
             android:layout_marginTop="10dip"/>
     </RelativeLayout>
 
-    </LinearLayout>
+
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Go to fixtures page"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dip"
+        android:layout_gravity="center"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:id="@+id/go_to_fixture_editing_page"/>
 
+</LinearLayout>
 
-</RelativeLayout>
+</ScrollView>
