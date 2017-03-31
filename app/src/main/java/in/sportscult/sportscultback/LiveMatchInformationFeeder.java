@@ -452,7 +452,7 @@ public class LiveMatchInformationFeeder extends AppCompatActivity {
                 }
                 int selected = SubstitutionTimeSpinner.getSelectedItemPosition();
                 if(selected==0){
-                    Toast.makeText(LiveMatchInformationFeeder.this,"Please enter time of Red Card Given.",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LiveMatchInformationFeeder.this,"Please enter time of Substitution.",Toast.LENGTH_SHORT).show();
                     return;
                 }
                 String TimeOfEvent = selected+"";
@@ -595,7 +595,7 @@ public class LiveMatchInformationFeeder extends AppCompatActivity {
                         for(Substitutions substitutions : SubstitutionsArrayList){
                             String Key = substitutions.SubstitutionsTime+substitutions.SubstitutionsPlayerJerseyNumberOut+substitutions.SubstitutionsPlayerNameIn;
                             Map<String,String> substitutionUploadData = new HashMap<String, String>();
-                            substitutionUploadData.put("Team Name",substitutions.SubstitutionsTime);
+                            substitutionUploadData.put("Team Name",substitutions.SubstitutionsTeamName);
                             substitutionUploadData.put("Player Name Out",substitutions.SubstitutionsPlayerNameOut);
                             substitutionUploadData.put("Player Jersey Number Out",substitutions.SubstitutionsPlayerJerseyNumberOut);
                             substitutionUploadData.put("Player Name In",substitutions.SubstitutionsPlayerNameIn);
