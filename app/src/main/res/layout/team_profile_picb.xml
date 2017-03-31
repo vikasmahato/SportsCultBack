@@ -8,6 +8,7 @@
         android:id="@+id/teamB_image"
         android:layout_width="@dimen/team_image_size"
         android:layout_height="@dimen/team_image_size"
+        android:layout_gravity="center"
         tools:src="@drawable/album1"/>
 
     <TextView
@@ -17,6 +18,6 @@
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/album_title_padding"
         android:textColor="@color/primaryText"
-        android:textSize="@dimen/album_title"
+        android:textSize="@dimen/title_small"
         tools:text="Team B"/>
 </LinearLayout>

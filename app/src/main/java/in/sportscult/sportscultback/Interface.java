@@ -19,4 +19,8 @@ public class Interface extends AppCompatActivity {
     public void live_match(View view){
         startActivity(new Intent(this,Add_Live_Matches.class));
     }
+
+    public void register(View view){
+        startActivity(new Intent(this,RegistrationActivity.class));
+    }
 }

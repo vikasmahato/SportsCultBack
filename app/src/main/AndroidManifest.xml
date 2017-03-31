@@ -26,7 +26,9 @@
         <activity android:name=".Add_Live_Matches" />
         <activity android:name=".Add_Matches_To_Fixtures" />
         <activity android:name=".LiveMatchInformationFeeder" />
-        <activity android:name=".LiveMatches" />
+
+        <activity android:name=".LiveMatches"/>
+        <activity android:name=".RegistrationActivity"/>
     </application>
 
 </manifest>
