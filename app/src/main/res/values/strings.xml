@@ -14,7 +14,7 @@
     <string name="team_name">Team Name</string>
     <string name="coach_contact">Coach Contact</string>
     <string name="coach_email">Email</string>
-    <string name="prompt_password">Password</string>
+    <string name="prompt_password">Team Password</string>
     <string name="hint_password_confirm">Confirm Password</string>
     <string name="add_more_players">Add Players</string>
     <string name="submit">Submit</string>
