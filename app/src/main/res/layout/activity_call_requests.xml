@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="in.sportscult.sportscultback.CallRequests"
+    android:orientation="vertical"
+    android:layout_margin="5dip">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="CALL REQUESTS"
+        android:textColor="@color/primaryText"
+        android:textSize="25dip"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="#000"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="There are no call requests."
+        android:textAllCaps="true"
+        android:textColor="@color/primaryText"
+        android:textSize="30dip"
+        android:textStyle="italic"
+        android:visibility="gone"
+        android:id="@+id/display_on_empty_call_requests"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dip"
+        android:id="@+id/call_requests_recyclerview"/>
+</LinearLayout>
