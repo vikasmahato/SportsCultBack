@@ -235,8 +235,8 @@ public class Add_Matches_To_Fixtures extends AppCompatActivity {
     //Helper functions
 
     public String properly_format_input(String s){
-        if(s.length()==0)
-            return "";
+        if(s.length()<2)
+            return s.toUpperCase().trim();
         String array[] = s.split(" ");
         StringBuilder stringBuilder = new StringBuilder("");
         for(String a:array) {
