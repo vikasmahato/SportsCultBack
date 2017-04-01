@@ -50,7 +50,7 @@ import java.util.Map;
 
 public class RegistrationActivity extends AppCompatActivity {
 
-    private EditText reg_team_name,reg_coach_name,reg_coach_contact,reg_coach_email,reg_password,reg_confirm_password;
+    private EditText reg_team_name,reg_coach_name,reg_coach_contact,reg_coach_email,reg_password,reg_confirm_password,reg_team_location;
     private Spinner age_group_dropdown;
     private String team_name,coach_name,coach_contact,coach_email,age_group,location,password,confirm_password;
     private static RecyclerView player_list;
@@ -86,6 +86,7 @@ public class RegistrationActivity extends AppCompatActivity {
         reg_coach_contact = (EditText)findViewById(R.id.reg_coach_contact);
         reg_password = (EditText)findViewById(R.id.reg_password);
         reg_confirm_password = (EditText)findViewById(R.id.reg_confirm_password);
+        reg_team_location = (EditText)findViewById(R.id.reg_team_location);
         player_list = (RecyclerView) findViewById(R.id.player_list);
         player_list.setNestedScrollingEnabled(false);
         age_group_dropdown = (Spinner)findViewById(R.id.age_group_dropdown);
@@ -112,20 +113,6 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         });
 
-        player_list.setOnTouchListener(new View.OnTouchListener() {
-            // Setting on Touch Listener for handling the touch inside ScrollView
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                // Disallow the touch request for parent scroll on touch of child view
-                v.getParent().requestDisallowInterceptTouchEvent(true);
-                return false;
-            }
-        });
-        //Comment this section out after adding additional functionality for them
-        //age_group = "Group - A";
-        location = "Rohini";
-        //Till here
-
         setuplistview();
     }
 
@@ -135,6 +122,7 @@ public class RegistrationActivity extends AppCompatActivity {
         player_list_adapter = new Player_List_Adapter(this,names_of_players,contact_of_players,jersey_number_of_players,uri_of_players);
         player_list.setAdapter(player_list_adapter);
         player_list.setLayoutManager(new LinearLayoutManager(this));
+        player_list.setNestedScrollingEnabled(false);
 
     }
 
@@ -267,6 +255,7 @@ public class RegistrationActivity extends AppCompatActivity {
         coach_email = reg_coach_email.getText().toString().trim();
         password = reg_password.getText().toString().trim();
         confirm_password = reg_confirm_password.getText().toString().trim();
+        location = properly_format_input(reg_team_location.getText().toString());
 
         //Verify if the details were entered correctly
         boolean correct = verify_details();
@@ -397,6 +386,11 @@ public class RegistrationActivity extends AppCompatActivity {
         else if(!(coach_email.contains("@") && coach_email.contains(".com"))){
             reg_coach_email.setError("Invalid Email");
             focus = reg_coach_email;
+            verification_success = false;
+        }
+        if(location.length()<2){
+            reg_team_location.setError("Location Too Short");
+            focus = reg_team_location;
             verification_success = false;
         }
         if(coach_contact.length()==0){

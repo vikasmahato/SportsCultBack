@@ -26,5 +26,10 @@
         android:text="REGISTRATION"
         style="@style/Widget.AppCompat.Button.Colored"
         android:onClick="register" />
-
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Call Requests"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:onClick="call_requests" />
 </LinearLayout>

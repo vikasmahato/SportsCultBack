@@ -3,7 +3,8 @@
     package="in.sportscult.sportscultback">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -23,6 +24,8 @@
         <activity android:name=".Add_Matches_To_Fixtures" />
         <activity android:name=".LiveMatchInformationFeeder" />
 
+        <activity android:name=".CallRequests" />
+        <activity android:name=".LoginActivity"></activity>
         <activity android:name=".LiveMatches"/>
         <activity android:name=".RegistrationActivity"/>
         <activity android:name=".SplashPermissionsActivity">

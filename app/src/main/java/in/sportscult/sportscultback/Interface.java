@@ -23,4 +23,7 @@ public class Interface extends AppCompatActivity {
     public void register(View view){
         startActivity(new Intent(this,RegistrationActivity.class));
     }
+    public void call_requests(View view){
+        startActivity(new Intent(this,CallRequests.class));
+    }
 }

@@ -722,8 +722,8 @@ public class LiveMatchInformationFeeder extends AppCompatActivity {
     }
 
     public String properly_format_input(String s){
-        if(s.length()==0)
-            return "";
+        if(s.length()<2)
+            return s.toUpperCase().trim();
         String array[] = s.split(" ");
         StringBuilder stringBuilder = new StringBuilder("");
         for(String a:array) {
