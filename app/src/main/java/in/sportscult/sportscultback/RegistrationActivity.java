@@ -5,14 +5,17 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.media.ThumbnailUtils;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -61,6 +64,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private static final int minimum_number_of_players = 2;
     private static final int GAlLERY_ACCESS = 1000;
     private static final int PROFILE_PIC_ACCESS = 1001;
+    private static final int ASK_MULTIPLE_PERMISSION_REQUEST_CODE = 1002;
     private static final String[] age_group_codes = {"0","A","B","C","D"};
 
     private static DatabaseReference databaseReference;
@@ -125,14 +129,6 @@ public class RegistrationActivity extends AppCompatActivity {
         setuplistview();
     }
 
-    //Choosing Profile Pic
-    public void add_team_profile_pic(View view){
-
-        Intent intent = new Intent(Intent.ACTION_PICK,MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-        startActivityForResult(intent,PROFILE_PIC_ACCESS);
-
-    }
-
     //ListView SetUp
     public void setuplistview(){
 
@@ -159,8 +155,7 @@ public class RegistrationActivity extends AppCompatActivity {
         upload_id_proof_scan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_PICK,MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-                startActivityForResult(intent,GAlLERY_ACCESS);
+                getUserID();
             }
         });
 
@@ -200,6 +195,57 @@ public class RegistrationActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
+
+    public void startActionForProfilePic(){
+        Intent intent = new Intent(Intent.ACTION_PICK,MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        startActivityForResult(intent,PROFILE_PIC_ACCESS);
+    }
+
+    //Choosing Profile Pic
+    public void add_team_profile_pic(View view){
+
+        if (android.os.Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP_MR1) {
+            startActionForProfilePic();
+        } else {
+            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED &&
+                    ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+                startActionForProfilePic();
+            } else {
+                if (shouldShowRequestPermissionRationale(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                    Toast.makeText(this, "External Storage and Camera permission is required to read images from device", Toast.LENGTH_SHORT).show();
+                }
+                requestPermissions(new String[] {android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                                android.Manifest.permission.CAMERA},
+                        ASK_MULTIPLE_PERMISSION_REQUEST_CODE);
+            }
+
+        }
+
+
+    }
+
+    public void getUserID(){
+        if (android.os.Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP_MR1) {
+            startActionForUserID();
+        } else {
+            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED &&
+                    ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+                startActionForUserID();
+            } else {
+                if (shouldShowRequestPermissionRationale(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                    Toast.makeText(this, "External Storage and Camera permission is required to read images from device", Toast.LENGTH_SHORT).show();
+                }
+                requestPermissions(new String[] {android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                                android.Manifest.permission.CAMERA},
+                        ASK_MULTIPLE_PERMISSION_REQUEST_CODE);
+            }
+
+        }
+    }
+    public void startActionForUserID(){
+        Intent intent = new Intent(Intent.ACTION_PICK,MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        startActivityForResult(intent,GAlLERY_ACCESS);
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

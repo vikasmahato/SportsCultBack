@@ -173,6 +173,24 @@ class LiveMatchAdapter extends RecyclerView.Adapter<LiveMatchAdapter.Viewholder3
         viewHolder.teamB_name.setText(data.TeamB);
         viewHolder.live_match_score_A.setText(data.TeamAGoals);
         viewHolder.live_match_score_B.setText(data.TeamBGoals);
+
+        //Set Text Color For Scores
+        int AColor,BColor;
+        if(Integer.parseInt(data.TeamAGoals)>Integer.parseInt(data.TeamBGoals)){
+            AColor = context.getResources().getColor(R.color.winning_color);
+            BColor = context.getResources().getColor(R.color.loosing_color);
+        }
+        else if(Integer.parseInt(data.TeamAGoals)<Integer.parseInt(data.TeamBGoals)){
+            BColor = context.getResources().getColor(R.color.winning_color);
+            AColor = context.getResources().getColor(R.color.loosing_color);
+        }
+        else{
+            BColor = context.getResources().getColor(R.color.draw_color);
+            AColor = context.getResources().getColor(R.color.draw_color);
+        }
+        viewHolder.live_match_score_A.setTextColor(AColor);
+        viewHolder.live_match_score_B.setTextColor(BColor);
+
         viewHolder.live_match_start_time.setText("Start Time : " + data.StartTime);
         String age_group_text;
         switch (data.AgeGroup){

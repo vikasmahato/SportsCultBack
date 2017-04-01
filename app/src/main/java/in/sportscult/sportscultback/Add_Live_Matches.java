@@ -203,7 +203,7 @@ public class Add_Live_Matches extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Fetching Data....");
         progressDialog.setCancelable(false);
-        progressDialog.show();
+        //progressDialog.show();
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child(age_group);
         databaseReference.child("Fixtures").addValueEventListener(new ValueEventListener() {

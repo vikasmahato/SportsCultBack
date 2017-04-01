@@ -1,33 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="5dip">
 
-
-    <TextView
-        android:id="@+id/individual_name"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Name Of Player"
-        android:textSize="20dip"
-        android:paddingBottom="5dip"/>
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/player_jersey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="333"
+            android:textSize="20dip"
+            android:layout_marginRight="10dip"
+            android:textColor="@color/primaryText"
+            />
+        <TextView
+            android:id="@+id/individual_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Vishal Gautam"
+            android:textSize="20dip"
+            android:paddingBottom="5dip"
+            android:textColor="@color/primaryText"/>
+    </LinearLayout>
     <TextView
         android:id="@+id/individual_contact"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Contact Of Player"
+        android:text="9971484677"
         android:textSize="20dip"
+        android:textColor="@color/primaryText"
+        android:layout_marginBottom="5dip"
         />
-    <TextView
-        android:id="@+id/player_jersey"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Jersey Number Of Player"
-        android:textSize="20dip"
-        />
+
     <ImageView
         android:layout_width="300dip"
         android:layout_height="300dip"
         android:background="#000000"
-        android:id="@+id/individual_id_proof"/>
+        android:id="@+id/individual_id_proof"
+        android:layout_gravity="center"/>
 </LinearLayout>
