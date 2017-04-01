@@ -14,4 +14,10 @@
     <color name="medium_grey">#9E9E9E</color>
     <color name="button_grey">#757575</color>
     <color name="black_overlay">#66000000</color>
+
+    <!-- ScoreCard -->
+    <color name="winning_color">#44F510</color>
+    <color name="loosing_color">#F43C14</color>
+    <color name="draw_color">#144AF4</color>
+
 </resources>
