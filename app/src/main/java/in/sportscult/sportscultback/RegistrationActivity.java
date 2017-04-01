@@ -368,7 +368,7 @@ public class RegistrationActivity extends AppCompatActivity {
                         });
                     }
 
-                    Intent intent = new Intent(RegistrationActivity.this,MainActivity.class);
+                    Intent intent = new Intent(RegistrationActivity.this,Interface.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY|Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 }
