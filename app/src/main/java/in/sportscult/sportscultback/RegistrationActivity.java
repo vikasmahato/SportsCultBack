@@ -225,22 +225,7 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     public void getUserID(){
-        if (android.os.Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP_MR1) {
-            startActionForUserID();
-        } else {
-            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED &&
-                    ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-                startActionForUserID();
-            } else {
-                if (shouldShowRequestPermissionRationale(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                    Toast.makeText(this, "External Storage and Camera permission is required to read images from device", Toast.LENGTH_SHORT).show();
-                }
-                requestPermissions(new String[] {android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                                android.Manifest.permission.CAMERA},
-                        ASK_MULTIPLE_PERMISSION_REQUEST_CODE);
-            }
-
-        }
+        startActionForUserID();
     }
     public void startActionForUserID(){
         Intent intent = new Intent(Intent.ACTION_PICK,MediaStore.Images.Media.INTERNAL_CONTENT_URI);
@@ -266,10 +251,6 @@ public class RegistrationActivity extends AppCompatActivity {
             Picasso.with(this).load(profile_pic_uri).resize(150,150).centerCrop().into(reg_team_profile_pic);
         }
     }
-
-    //TIll here Add A New Player
-
-
 
     //Register Your Team
     public void register_team(View view){
@@ -379,7 +360,7 @@ public class RegistrationActivity extends AppCompatActivity {
                         });
                     }
 
-                    Intent intent = new Intent(RegistrationActivity.this,MainActivity.class);
+                    Intent intent = new Intent(RegistrationActivity.this,Interface.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY|Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 }
