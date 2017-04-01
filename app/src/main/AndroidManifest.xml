@@ -23,12 +23,6 @@
         <activity android:name=".Add_Live_Matches" />
         <activity android:name=".Add_Matches_To_Fixtures" />
         <activity android:name=".LiveMatchInformationFeeder" />
-<<<<<<< HEAD
-
-        <activity android:name=".CallRequests" />
-        <activity android:name=".LoginActivity"></activity>
-=======
->>>>>>> 479ef1d761c94ba9b6cb78a1f8ddcf4bb04fe9f2
 
         <activity android:name=".CallRequests" />
         <activity android:name=".LoginActivity"></activity>

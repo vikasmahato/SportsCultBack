@@ -61,7 +61,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private static Player_List_Adapter player_list_adapter;
     private static ProgressDialog progressDialog;
     //Provide the minimum number of permissable team members in a team
-    private static final int minimum_number_of_players = 2;
+    private static final int minimum_number_of_players = 7;
     private static final int GAlLERY_ACCESS = 1000;
     private static final int PROFILE_PIC_ACCESS = 1001;
     private static final int ASK_MULTIPLE_PERMISSION_REQUEST_CODE = 1002;
@@ -74,6 +74,13 @@ public class RegistrationActivity extends AppCompatActivity {
     //Add Team Profile Pic, Group Jersey,Password Field
     //Dropdown Menu for Location, Age Group
     //Under the player description, add jersey number
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this,Interface.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY|Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -192,23 +199,7 @@ public class RegistrationActivity extends AppCompatActivity {
     //Choosing Profile Pic
     public void add_team_profile_pic(View view){
 
-        if (android.os.Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP_MR1) {
             startActionForProfilePic();
-        } else {
-            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED &&
-                    ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-                startActionForProfilePic();
-            } else {
-                if (shouldShowRequestPermissionRationale(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                    Toast.makeText(this, "External Storage and Camera permission is required to read images from device", Toast.LENGTH_SHORT).show();
-                }
-                requestPermissions(new String[] {android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                                android.Manifest.permission.CAMERA},
-                        ASK_MULTIPLE_PERMISSION_REQUEST_CODE);
-            }
-
-        }
-
 
     }
 

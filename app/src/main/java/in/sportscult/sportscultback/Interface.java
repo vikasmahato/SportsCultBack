@@ -13,6 +13,14 @@ public class Interface extends AppCompatActivity {
         setContentView(R.layout.activity_interface);
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+        homeIntent.addCategory( Intent.CATEGORY_HOME );
+        homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(homeIntent);
+    }
+
     public void generate_fixtures(View view){
         startActivity(new Intent(this,Add_Matches_To_Fixtures.class));
     }
