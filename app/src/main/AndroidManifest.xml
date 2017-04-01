@@ -23,12 +23,9 @@
         <activity android:name=".Add_Live_Matches" />
         <activity android:name=".Add_Matches_To_Fixtures" />
         <activity android:name=".LiveMatchInformationFeeder" />
-<<<<<<< HEAD
-        <activity android:name=".LiveMatches" />
-        <activity android:name=".RegistrationActivity" />
+
         <activity android:name=".CallRequests" />
         <activity android:name=".LoginActivity"></activity>
-=======
 
         <activity android:name=".LiveMatches"/>
         <activity android:name=".RegistrationActivity"/>
@@ -39,7 +36,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
->>>>>>> e5a053676e7bea3934c66b7ac1e7d395edd811be
     </application>
 
 </manifest>
