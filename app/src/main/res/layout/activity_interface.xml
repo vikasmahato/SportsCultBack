@@ -8,6 +8,16 @@
     android:layout_margin="@dimen/activity_vertical_margin"
     tools:context="in.sportscult.sportscultback.Interface">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="You are Logged in as "
+        android:id="@+id/logged_in_mail"
+        android:gravity="center"
+        android:layout_marginBottom="10dip"
+        android:textSize="18sp"
+        android:textColor="@color/primaryText"/>
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,4 +42,13 @@
         android:text="Call Requests"
         style="@style/Widget.AppCompat.Button.Colored"
         android:onClick="call_requests" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:text="SIGN OUT"
+        android:onClick="log_the_user_out"
+        style="@style/Widget.AppCompat.Button.Colored"
+        />
 </LinearLayout>

@@ -35,6 +35,13 @@ public class CallRequests extends AppCompatActivity {
     private static final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Call Requests");
 
     @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this,Interface.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY|Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_call_requests);
