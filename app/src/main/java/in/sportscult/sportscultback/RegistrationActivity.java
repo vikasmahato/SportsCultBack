@@ -5,6 +5,486 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.ThumbnailUtils;
+import android.net.Uri;
+import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
+
+import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+public class RegistrationActivity extends AppCompatActivity {
+
+    private EditText reg_team_name,reg_coach_name,reg_coach_contact,reg_coach_email,reg_team_location;
+    private Spinner age_group_dropdown;
+    private static ImageView reg_team_profile_pic;
+    private String team_name,coach_name,coach_contact,coach_email,age_group,location;
+    private static RecyclerView player_list;
+    private static Uri profile_pic_uri = null;
+    private static ArrayList<String> names_of_players,contact_of_players,jersey_number_of_players;
+    private static View AlertDialogView;
+    private static Player_List_Adapter player_list_adapter;
+    private static ProgressDialog progressDialog;
+    //Provide the minimum number of permissable team members in a team
+    private static final int minimum_number_of_players = 2;
+    private static final int PROFILE_PIC_ACCESS = 1001;
+    private static final String[] age_group_codes = {"0","A","B","C","D"};
+
+
+    private static DatabaseReference databaseReference;
+    private static DatabaseReference databaseReference1;
+    private static StorageReference storageReference;
+
+    //Add Team Profile Pic, Group Jersey,Password Field
+    //Dropdown Menu for Location, Age Group
+    //Under the player description, add jersey number
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this,Interface.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY|Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_registration);
+
+        reg_team_name = (EditText)findViewById(R.id.reg_team_name);
+        reg_coach_name = (EditText)findViewById(R.id.reg_coach_name);
+        reg_coach_email = (EditText)findViewById(R.id.reg_coach_email);
+        reg_coach_contact = (EditText)findViewById(R.id.reg_coach_contact);
+        reg_team_location = (EditText)findViewById(R.id.reg_team_location);
+        player_list = (RecyclerView) findViewById(R.id.player_list);
+        reg_team_profile_pic = (ImageView)findViewById(R.id.reg_team_profile_pic);
+        age_group_dropdown = (Spinner)findViewById(R.id.age_group_dropdown);
+        names_of_players = new ArrayList<String>();
+        contact_of_players = new ArrayList<String>();
+        jersey_number_of_players = new ArrayList<String>();
+        profile_pic_uri = null;
+        age_group = "Group - 0";
+
+        //Set Up Spinner For Age Group
+        ArrayAdapter<String> ageGroupAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.age_groups));
+        ageGroupAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        age_group_dropdown.setAdapter(ageGroupAdapter);
+        age_group_dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                age_group = "Group - "+age_group_codes[position];
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        player_list.setLayoutManager(new LinearLayoutManager(this));
+        player_list.setNestedScrollingEnabled(false);
+        setuplistview();
+    }
+
+    //ListView SetUp
+    public void setuplistview(){
+
+        player_list_adapter = new Player_List_Adapter(this,names_of_players,contact_of_players,jersey_number_of_players);
+        player_list.setAdapter(player_list_adapter);
+
+    }
+
+    //Add a new player
+    public void add_new_player(View view){
+
+        AlertDialogView = LayoutInflater.from(RegistrationActivity.this).inflate(R.layout.add_new_player,null);
+        final AlertDialog.Builder alertDialog = new AlertDialog.Builder(RegistrationActivity.this, R.style.MyAlertDialogStyle);
+        alertDialog.setView(AlertDialogView);
+        alertDialog.setTitle("Enter The Player Details");
+        alertDialog.setCancelable(false);
+        final EditText player_name = (EditText)AlertDialogView.findViewById(R.id.player_name);
+        final EditText player_contact = (EditText)AlertDialogView.findViewById(R.id.player_contact);
+        final EditText player_jersey = (EditText)AlertDialogView.findViewById(R.id.player_jersey);
+
+        alertDialog.setPositiveButton("Add Player", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                String playername = properly_format_input(player_name.getText().toString());
+                String playercontact = player_contact.getText().toString();
+                String playerjersey = player_jersey.getText().toString();
+
+                //Image uri is already present in the variable id_proof_scan_uri
+
+                if(player_contact.length()<6 || player_name.length()==0 || player_jersey.length()<1){
+                }
+                else{
+
+                    //Now add all the data to the list view data set
+                    names_of_players.add(playername);
+                    contact_of_players.add(playercontact);
+                    jersey_number_of_players.add(playerjersey);
+                    setuplistview();
+                    //player_list_adapter.notifyDataSetChanged();
+                }
+
+                dialog.cancel();
+
+            }
+        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        alertDialog.show();
+    }
+
+
+    //Choosing Profile Pic
+    public void add_team_profile_pic(View view){
+
+        Intent intent = new Intent(Intent.ACTION_PICK,MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        startActivityForResult(intent,PROFILE_PIC_ACCESS);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode==PROFILE_PIC_ACCESS && resultCode==RESULT_OK){
+            profile_pic_uri = data.getData();
+            Picasso.with(this).load(profile_pic_uri).resize(150,150).centerCrop().into(reg_team_profile_pic);
+        }
+    }
+
+    //Register Your Team
+    public void register_team(View view){
+
+        progressDialog = new ProgressDialog(RegistrationActivity.this);
+        progressDialog.setMessage("Registering Your Team...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
+        //Get the contents from fields
+        team_name = properly_format_input(reg_team_name.getText().toString());
+        coach_name = properly_format_input(reg_coach_name.getText().toString());
+        coach_contact = reg_coach_contact.getText().toString().trim();
+        coach_email = reg_coach_email.getText().toString().trim();
+        location = properly_format_input(reg_team_location.getText().toString());
+
+        //Verify if the details were entered correctly
+        boolean correct = verify_details();
+
+        if(!correct) {
+            progressDialog.dismiss();
+            return;
+        }
+
+        //Verify if a team name with the same name in that age group already exists
+        DatabaseReference tempDatabaseReference = FirebaseDatabase.getInstance().getReference().child(age_group).child("Team Names");
+        tempDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Map<String,String> map = (Map<String,String>)dataSnapshot.getValue();
+                if(map!=null && map.get(team_name)!=null){
+                    reg_team_name.setError("Team Name Already Exists");
+                    reg_team_name.requestFocus();
+                    progressDialog.dismiss();
+                    return;
+                }
+                else{
+                    //Add Team To Leaderboard
+                    DatabaseReference LeaderboardReference = FirebaseDatabase.getInstance().getReference().child(age_group).child("Leaderboard").child(team_name);
+                    Map<String,String> leaderboardData = new HashMap<String, String>();
+                    leaderboardData.put("Team Name",team_name);
+                    leaderboardData.put("Matches Played","0");
+                    leaderboardData.put("Matches Won","0");
+                    leaderboardData.put("Matches Drawn","0");
+                    leaderboardData.put("Matches Lost","0");
+                    leaderboardData.put("Goals Scored","0");
+                    leaderboardData.put("Goals Conceived","0");
+                    leaderboardData.put("Red Cards","0");
+                    leaderboardData.put("Points","0");
+                    LeaderboardReference.setValue(leaderboardData);
+
+                    //Add Team Name along with password
+                    databaseReference1 = FirebaseDatabase.getInstance().getReference().child(age_group).child("Team Names").child(team_name);
+
+                    //Add Team Details
+                    storageReference = FirebaseStorage.getInstance().getReference().child(age_group).child(team_name);
+                    //Add Team Profile Pic
+
+                    //Generate thumbnail and save it and its download url
+                    byte[] thumbnailForProfilePic = generateThumbnailForImage(profile_pic_uri);
+                    storageReference.child("Team Profile Pic Thumbnail").putBytes(thumbnailForProfilePic).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Uri downloadUri = taskSnapshot.getDownloadUrl();
+                            databaseReference1.child("Team Profile Pic Thumbnail Url").setValue(downloadUri.toString());
+                        }
+                    });
+
+                    //Save image and its download url
+                    storageReference.child("Team Profile Pic").putFile(profile_pic_uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Uri downloadUri = taskSnapshot.getDownloadUrl();
+                            databaseReference1.child("Team Profile Pic Url").setValue(downloadUri.toString());
+                        }
+                    });
+
+                    databaseReference = FirebaseDatabase.getInstance().getReference().child(age_group).child("Team Description").child(team_name);
+                    Map<String,String> teamData = new HashMap<String, String>();
+                    teamData.put("Coach Name",coach_name);
+                    teamData.put("Contact Number",coach_contact);
+                    teamData.put("Email",coach_email);
+                    teamData.put("Location",location);
+                    teamData.put("Number Of Players",(""+names_of_players.size()));
+                    databaseReference.setValue(teamData);
+
+                    //Adding information about players\
+                    databaseReference = databaseReference.child("Players");
+                    for(int i=0;i<names_of_players.size();i++){
+                        //Generate a proper player code so that players can be distinguished
+                        String player_code = jersey_number_of_players.get(i)+"-"+ names_of_players.get(i);
+                        final DatabaseReference tempreference = databaseReference.child(player_code);
+                        Map<String,String> playerUploadData = new HashMap<String, String>();
+                        playerUploadData.put("Name",names_of_players.get(i));
+                        playerUploadData.put("Contact",contact_of_players.get(i));
+                        playerUploadData.put("Jersey Number",jersey_number_of_players.get(i));
+                        tempreference.setValue(playerUploadData);
+                    }
+
+                    Intent intent = new Intent(RegistrationActivity.this,Interface.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY|Intent.FLAG_ACTIVITY_NEW_TASK);
+                    progressDialog.dismiss();
+                    create_new_form();
+                    startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    public void create_new_form(){
+
+        reg_coach_contact.setText("");
+        reg_coach_email.setText("");
+        reg_coach_name.setText("");
+        reg_team_location.setText("");
+        reg_team_name.setText("");
+        age_group_dropdown.setSelection(0);
+        reg_team_profile_pic.setImageResource(R.mipmap.ic_launcher);
+        names_of_players = new ArrayList<String>();
+        contact_of_players = new ArrayList<String>();
+        jersey_number_of_players = new ArrayList<String>();
+
+    }
+
+    boolean verify_details(){
+
+        View focus = null;
+        boolean verification_success = true;
+        /*
+        Not compulsory
+        if(coach_email.length()==0){
+            reg_coach_email.setError(getString(R.string.empty_field));
+            focus = reg_coach_email;
+            verification_success = false;
+        }
+        else if(!(coach_email.contains("@") && coach_email.contains(".com"))){
+            reg_coach_email.setError("Invalid Email");
+            focus = reg_coach_email;
+            verification_success = false;
+        }
+        */
+        if(location.length()<2){
+            reg_team_location.setError("Location Too Short");
+            focus = reg_team_location;
+            verification_success = false;
+        }
+        /*
+        Not Compulsory
+        if(coach_contact.length()==0){
+            reg_coach_contact.setError(getString(R.string.empty_field));
+            focus = reg_coach_contact;
+            verification_success = false;
+        }
+        else if(coach_contact.length()<6){
+            reg_coach_contact.setError("Invalid Contact Number");
+            focus = reg_coach_contact;
+            verification_success = false;
+        }
+
+        */
+        if(coach_name.length()==0) {
+            reg_coach_name.setError(getString(R.string.empty_field));
+            focus = reg_coach_name;
+            verification_success = false;
+        }
+        if(age_group.equals("Group - 0")){
+            Toast.makeText(RegistrationActivity.this,"Please Select An Age Group For Team",Toast.LENGTH_LONG).show();
+            verification_success = false;
+            focus = age_group_dropdown;
+        }
+        if(team_name.length()==0){
+            reg_team_name.setError(getString(R.string.empty_field));
+            focus = reg_team_name;
+            verification_success = false;
+        }
+        if(profile_pic_uri==null){
+            Toast.makeText(RegistrationActivity.this,"Please Select A Team Profile Pic",Toast.LENGTH_LONG).show();
+            verification_success = false;
+            if(focus==null)
+                focus = reg_team_name;
+        }
+        if(verification_success && names_of_players.size()<minimum_number_of_players){
+            Toast.makeText(RegistrationActivity.this,("You need to add atleast "+(minimum_number_of_players-names_of_players.size())+" more players."),Toast.LENGTH_LONG).show();
+            verification_success = false;
+            if(focus==null)
+                focus = reg_team_name;
+        }
+
+        if(!verification_success)
+            focus.requestFocus();
+        return verification_success;
+    }
+
+
+
+    //Till here Register Your Team
+
+
+    //Helper Methods
+
+    public String properly_format_input(String s){
+        if(s.length()<2)
+            return s.toUpperCase().trim();
+        String array[] = s.split(" ");
+        StringBuilder stringBuilder = new StringBuilder("");
+        for(String a:array) {
+            stringBuilder.append(a.substring(0, 1).toUpperCase());
+            stringBuilder.append(a.substring(1).toLowerCase()).append(" ");
+        }
+        return stringBuilder.toString().trim();
+    }
+
+    public byte[] generateThumbnailForImage(Uri uri){
+        final int THUMBSIZE = 100;
+
+        Bitmap thumbImage = ThumbnailUtils.extractThumbnail(
+                BitmapFactory.decodeFile(getPath(uri)),
+                THUMBSIZE,
+                THUMBSIZE);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        thumbImage.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        return baos.toByteArray();
+    }
+
+    public String getPath(Uri uri) {
+        String[] projection = { MediaStore.Images.Media.DATA };
+        Cursor cursor = managedQuery(uri, projection, null, null, null);
+        int column_index = cursor
+                .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+
+        cursor.moveToFirst();
+        return cursor.getString(column_index);
+    }
+
+    //Adapter for displaying player details in listview
+    class Player_List_Adapter extends RecyclerView.Adapter<Player_List_Adapter.ViewHolder0>{
+
+        ArrayList<String> names,contacts,jersey;
+        Context context;
+
+        public Player_List_Adapter(Context context,ArrayList<String> names,ArrayList<String> contacts,ArrayList<String> jersey) {
+            this.context = context;
+            this.names = names;
+            this.contacts = contacts;
+            this.jersey = jersey;
+        }
+
+        @Override
+        public ViewHolder0 onCreateViewHolder(ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(context).inflate(R.layout.player_row,parent,false);
+            ViewHolder0 viewHolder0 = new ViewHolder0(view);
+            return viewHolder0;
+        }
+
+        @Override
+        public void onBindViewHolder(ViewHolder0 viewHolder, int position) {
+            viewHolder.individual_name.setText(names.get(position));
+            viewHolder.individual_contact.setText(contacts.get(position));
+            viewHolder.individual_jersey.setText(jersey.get(position));
+        }
+
+        @Override
+        public int getItemCount() {
+            return names.size();
+        }
+
+        public class ViewHolder0 extends RecyclerView.ViewHolder{
+            TextView individual_name,individual_contact,individual_jersey;
+            ViewHolder0(View v){
+                super(v);
+                individual_name = (TextView)v.findViewById(R.id.individual_name);
+                individual_contact = (TextView)v.findViewById(R.id.individual_contact);
+                individual_jersey = (TextView)v.findViewById(R.id.player_jersey);
+            }
+        }
+
+
+    }
+
+
+}
+
+
+/*
+
+package in.sportscult.sportscultback;
+
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -513,3 +993,6 @@ public class RegistrationActivity extends AppCompatActivity {
 
 
 }
+
+
+*/

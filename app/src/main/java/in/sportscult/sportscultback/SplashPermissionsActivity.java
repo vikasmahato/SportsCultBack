@@ -16,7 +16,7 @@ import android.util.Log;
 
 public class SplashPermissionsActivity extends Activity {
 
-    private int                 timeoutMillis       = 5000;
+    private int                 timeoutMillis       = 3000;
 
     private long                startTimeMillis     = 0;
 
@@ -29,7 +29,7 @@ public class SplashPermissionsActivity extends Activity {
 
     @SuppressWarnings("rawtypes")
     public Class getNextActivityClass() {
-        return Interface.class;
+        return LoginActivity.class;
     }
 
     public String[] getRequiredPermissions() {
@@ -82,7 +82,9 @@ public class SplashPermissionsActivity extends Activity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(SplashPermissionsActivity.this, getNextActivityClass()));
+                Intent intent = new Intent(SplashPermissionsActivity.this, getNextActivityClass());
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
                 finish();
             }
         }, delayMillis);
