@@ -172,12 +172,12 @@ public class Add_Matches_To_Fixtures extends AppCompatActivity {
         String TeamA,TeamB,Date,Time,Venue,Referee,AgeGroup;
 
         //Do the appropriate capitalization
-        TeamA = properly_format_input(TeamA_Name_Fixture.getText().toString());
-        TeamB = properly_format_input(TeamB_Name_Fixture.getText().toString());
+        TeamA = RegistrationActivity.properly_format_input(TeamA_Name_Fixture.getText().toString());
+        TeamB = RegistrationActivity.properly_format_input(TeamB_Name_Fixture.getText().toString());
         Date = Date_Fixture.getText().toString();
         Time = Time_Fixture.getText().toString();
-        Venue = properly_format_input(Venue_Fixture.getText().toString());
-        Referee = properly_format_input(Referee_Fixture.getText().toString());
+        Venue = RegistrationActivity.properly_format_input(Venue_Fixture.getText().toString());
+        Referee = RegistrationActivity.properly_format_input(Referee_Fixture.getText().toString());
         int index = age_group_spinner_fixture.getSelectedItemPosition();
         AgeGroup = age_group_texts[index];
         verification_status = true;
@@ -233,18 +233,6 @@ public class Add_Matches_To_Fixtures extends AppCompatActivity {
     }
 
     //Helper functions
-
-    public String properly_format_input(String s){
-        if(s.length()<2)
-            return s.toUpperCase().trim();
-        String array[] = s.split(" ");
-        StringBuilder stringBuilder = new StringBuilder("");
-        for(String a:array) {
-            stringBuilder.append(a.substring(0, 1).toUpperCase());
-            stringBuilder.append(a.substring(1).toLowerCase()).append(" ");
-        }
-        return stringBuilder.toString().trim();
-    }
 
     public String pushId(String date,String Raw_Time) throws ParseException{
 
