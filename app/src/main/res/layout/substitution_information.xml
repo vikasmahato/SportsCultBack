@@ -137,7 +137,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             style="@style/Widget.AppCompat.Button.Colored"
-            android:text="Register THE SUBSTITUTION"
+            android:text="Register"
             android:id="@+id/file_the_substitution"/>
     </RelativeLayout>
 </LinearLayout>

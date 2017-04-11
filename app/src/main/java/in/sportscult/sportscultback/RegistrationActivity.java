@@ -55,7 +55,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private static Player_List_Adapter player_list_adapter;
     private static ProgressDialog progressDialog;
     //Provide the minimum number of permissable team members in a team
-    private static final int minimum_number_of_players = 2;
+    private static final int minimum_number_of_players = 7;
     private static final int PROFILE_PIC_ACCESS = 1001;
     private static final String[] age_group_codes = {"0","A","B","C","D"};
 
@@ -393,7 +393,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
     //Helper Methods
 
-    public String properly_format_input(String s){
+    public static String properly_format_input(String s){
         if(s.length()<2)
             return s.toUpperCase().trim();
         String array[] = s.split(" ");

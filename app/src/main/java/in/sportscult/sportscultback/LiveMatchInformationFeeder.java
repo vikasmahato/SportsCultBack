@@ -43,6 +43,7 @@ public class LiveMatchInformationFeeder extends AppCompatActivity {
     private static ArrayList<LeaderboardInformation> leaderboardInformationsArrayList;
     private static Map<String,Integer> PositionOfTeamsInArrayList;
     private static int RedCardsA,RedCardsB;
+    private static Button add_the_playing7_button;
     private static final String ZERO = "0";
     private static final int WIN_POINTS = 5;
     private static final int LOOSE_POINTS = 1;
@@ -71,6 +72,7 @@ public class LiveMatchInformationFeeder extends AppCompatActivity {
         live_match_age_group = (TextView)findViewById(R.id.live_match_age_group);
         teamA_image = (ImageView)findViewById(R.id.teamA_image);
         teamB_image = (ImageView)findViewById(R.id.teamB_image);
+        add_the_playing7_button = (Button)findViewById(R.id.add_the_playing7_button);
 
         view1 = findViewById(R.id.goal_information_fields);
         GoalsRadioGroup = (RadioGroup)view1.findViewById(R.id.radiogroup);
@@ -126,7 +128,7 @@ public class LiveMatchInformationFeeder extends AppCompatActivity {
 
         alertDialog = new AlertDialog.Builder(this);
 
-        GoalsFile.setText("Register The Goal");
+        GoalsFile.setText("Register");
         GoalsFile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -134,7 +136,7 @@ public class LiveMatchInformationFeeder extends AppCompatActivity {
             }
         });
 
-        RedCardsFile.setText("Register The Red Card");
+        RedCardsFile.setText("Register");
         RedCardsFile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -171,6 +173,16 @@ public class LiveMatchInformationFeeder extends AppCompatActivity {
         });
     }
 
+    public void add_the_playing7(View view){
+
+        Intent intent = new Intent(LiveMatchInformationFeeder.this,AddLineup.class);
+        intent.putExtra("Live Match ID",UniqueMatchID);
+        intent.putExtra("Team A",teamA_name.getText().toString());
+        intent.putExtra("Team B",teamB_name.getText().toString());
+        startActivity(intent);
+
+    }
+
     public void SetUpLiveMatchCard(){
 
         LiveMatchReference.addValueEventListener(new ValueEventListener() {
@@ -189,6 +201,7 @@ public class LiveMatchInformationFeeder extends AppCompatActivity {
                 GoalsTeamB.setText(TeamB);
                 SubstitutionTeamB.setText(TeamB);
                 RedCardsTeamB.setText(TeamB);
+                add_the_playing7_button.setClickable(true);
                 live_match_teama_goals.setText(map.get("Team A Goals"));
                 live_match_teamb_goals.setText(map.get("Team B Goals"));
                 live_match_age_group.setText(map.get("Age Group"));
@@ -307,7 +320,7 @@ public class LiveMatchInformationFeeder extends AppCompatActivity {
                 //int GoalsForeTeamB = Integer.parseInt(live_match_teamb_goals.getText().toString());
 
                 String JerseyNumber = GoalsJerseyNumber.getText().toString();
-                String PlayerName = properly_format_input(GoalsPlayerName.getText().toString());
+                String PlayerName = RegistrationActivity.properly_format_input(GoalsPlayerName.getText().toString());
 
                 if(JerseyNumber.length()<1 || PlayerName.length()<2){
                     Toast.makeText(LiveMatchInformationFeeder.this,"Invalid Player Details",Toast.LENGTH_SHORT).show();
@@ -371,7 +384,7 @@ public class LiveMatchInformationFeeder extends AppCompatActivity {
                 }
 
                 String JerseyNumber = RedCardsJerseyNumber.getText().toString();
-                String PlayerName = properly_format_input(RedCardsPlayerName.getText().toString());
+                String PlayerName = RegistrationActivity.properly_format_input(RedCardsPlayerName.getText().toString());
 
                 if(JerseyNumber.length()<1 || PlayerName.length()<2){
                     Toast.makeText(LiveMatchInformationFeeder.this,"Invalid Player Details",Toast.LENGTH_SHORT).show();
@@ -435,9 +448,9 @@ public class LiveMatchInformationFeeder extends AppCompatActivity {
                 }
 
                 String JerseyNumberOut = SubstitutionJerseyNumberOut.getText().toString();
-                String PlayerNameOut = properly_format_input(SubstitutionPlayerNameOut.getText().toString());
+                String PlayerNameOut = RegistrationActivity.properly_format_input(SubstitutionPlayerNameOut.getText().toString());
                 String JerseyNumberIn = SubstitutionJerseyNumberIn.getText().toString();
-                String PlayerNameIn = properly_format_input(SubstitutionPlayerNameIn.getText().toString());
+                String PlayerNameIn = RegistrationActivity.properly_format_input(SubstitutionPlayerNameIn.getText().toString());
 
                 if(JerseyNumberOut.length()<1 || PlayerNameOut.length()<2 || JerseyNumberIn.length()<1 || PlayerNameIn.length()<2){
                     Toast.makeText(LiveMatchInformationFeeder.this,"Invalid Player Details",Toast.LENGTH_SHORT).show();
@@ -719,18 +732,6 @@ public class LiveMatchInformationFeeder extends AppCompatActivity {
         });
         alertDialog.show();
 
-    }
-
-    public String properly_format_input(String s){
-        if(s.length()<2)
-            return s.toUpperCase().trim();
-        String array[] = s.split(" ");
-        StringBuilder stringBuilder = new StringBuilder("");
-        for(String a:array) {
-            stringBuilder.append(a.substring(0, 1).toUpperCase());
-            stringBuilder.append(a.substring(1).toLowerCase()).append(" ");
-        }
-        return stringBuilder.toString().trim();
     }
 
 }

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="in.sportscult.sportscultback.AddLineup"
+    android:orientation="vertical"
+    android:layout_margin="5dip">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ADD THE PLAYERS"
+            android:textSize="25dip"
+            android:gravity="center"
+            android:textColor="@color/blue_500"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:background="#000"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lineup_team_names">
+
+            <TextView
+                android:id="@+id/lineup_teama"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Team A"
+                android:textAllCaps="true"
+                android:textColor="#FFF"
+                android:textSize="15dip"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:paddingTop="7dip"
+                android:paddingBottom="7dip"
+                android:background="@color/button_grey"
+                android:clickable="true"
+                android:onClick="display_lineup_of_teamA"
+                android:layout_toLeftOf="@+id/seperator_line"
+                android:layout_alignParentStart="true" />
+            <View
+                android:layout_width="1dip"
+                android:layout_height="29dip"
+                android:background="#000"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/seperator_line"
+                android:layout_centerVertical="true"
+                />
+            <TextView
+                android:id="@+id/lineup_teamb"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Team B"
+                android:textAllCaps="true"
+                android:textColor="@color/splash"
+                android:textSize="15dip"
+                android:textStyle="bold"
+                android:layout_alignParentEnd="true"
+                android:layout_toRightOf="@+id/seperator_line"
+                android:gravity="center"
+                android:paddingTop="7dip"
+                android:paddingBottom="7dip"
+                android:background="@color/viewBg"
+                android:clickable="true"
+                android:onClick="display_lineup_of_teamB"
+                />
+
+        </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:background="#000"
+            android:layout_marginBottom="5dip"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="50dip"
+                android:hint="342"
+                android:gravity="center"
+                android:layout_marginRight="10dip"
+                android:maxLength="3"
+                android:inputType="number"
+                android:id="@+id/addMatchJerseyNumber"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Player Name"
+                android:id="@+id/addMatchPlayerName"/>
+        </LinearLayout>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="ADD PLAYER"
+            android:textSize="15dip"
+            android:background="@color/colorAccent"
+            android:paddingLeft="10dip"
+            android:paddingRight="10dip"
+            android:layout_marginTop="5dip"
+            android:onClick="add_player_to_lineup"
+            android:clickable="true"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dip"
+            android:id="@+id/add_players_recyclerview"/>
+
+        <!--<Button-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:text="ADD TO THE LINEUP"-->
+            <!--android:textSize="15dip"-->
+            <!--android:background="@color/colorAccent"-->
+            <!--android:paddingLeft="10dip"-->
+            <!--android:paddingRight="10dip"-->
+            <!--android:layout_marginTop="5dip"/>-->
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>
