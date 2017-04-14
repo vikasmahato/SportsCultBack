@@ -54,4 +54,23 @@ public class Interface extends AppCompatActivity {
         sharedPreferences.edit().remove("Email").commit();
         startActivity(intent);
     }
+
+    public static String formatDate(int day,int month,int year){
+        String FormattedDate = "";
+        if(day<10)
+            FormattedDate+=("0"+day);
+        else
+            FormattedDate+=day;
+        FormattedDate+="-";
+        if(month<10)
+            FormattedDate+=("0"+month);
+        else
+            FormattedDate+=month;
+        FormattedDate+="-";
+        if(year<10)
+            FormattedDate+=("0"+year);
+        else
+            FormattedDate+=year;
+        return FormattedDate;
+    }
 }

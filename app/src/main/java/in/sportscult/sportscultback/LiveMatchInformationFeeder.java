@@ -549,6 +549,8 @@ public class LiveMatchInformationFeeder extends AppCompatActivity {
                         ArrayList<GoalsOrRedCards> GoalsArrayList = new ArrayList<GoalsOrRedCards>();
                         ArrayList<GoalsOrRedCards> RedCardsArrayList = new ArrayList<GoalsOrRedCards>();
                         ArrayList<Substitutions> SubstitutionsArrayList = new ArrayList<Substitutions>();
+                        ArrayList<Player> lineupteamA = new ArrayList<Player>();
+                        ArrayList<Player> lineupteamB = new ArrayList<Player>();
 
                         DataSnapshot dataSnapshotGoals = dataSnapshot.child("Goals");
                         for(DataSnapshot childSnapshot : dataSnapshotGoals.getChildren()){
@@ -571,6 +573,17 @@ public class LiveMatchInformationFeeder extends AppCompatActivity {
                             Map<String,String> map1 = (Map<String,String>) childSnapshot.getValue();
                             SubstitutionsArrayList.add(new Substitutions(map1.get("Team Name"),map1.get("Player Name Out"),map1.get("Player Jersey Number Out"),map1.get("Player Name In"),
                                     map1.get("Player Jersey Number In"),map1.get("Time")));
+                        }
+
+                        DataSnapshot TeamALineupSnapshot = dataSnapshot.child("Lineups").child("Team A");
+                        for(DataSnapshot childSnapshot : TeamALineupSnapshot.getChildren()){
+                            Map<String,String> map1 = (HashMap<String,String>) childSnapshot.getValue();
+                            lineupteamA.add(new Player(map1.get("Jersey Number"),map1.get("Player Name")));
+                        }
+                        DataSnapshot TeamBLineupSnapshot = dataSnapshot.child("Lineups").child("Team B");
+                        for(DataSnapshot childSnapshot : TeamBLineupSnapshot.getChildren()){
+                            Map<String,String> map1 = (HashMap<String,String>) childSnapshot.getValue();
+                            lineupteamB.add(new Player(map1.get("Jersey Number"),map1.get("Player Name")));
                         }
                         //Data Retrieval Complete
                         //The match has yet to be removed from the live match page
@@ -615,6 +628,18 @@ public class LiveMatchInformationFeeder extends AppCompatActivity {
                             substitutionUploadData.put("Player Jersey Number In",substitutions.SubstitutionsPlayerJerseyNumberIn);
                             substitutionUploadData.put("Time",substitutions.SubstitutionsTime);
                             ResultsPageReference.child("Substitutions").child(Key).setValue(substitutionUploadData);
+                        }
+                        for(Player player : lineupteamA){
+                            Map<String,String> lineupuploadData=  new HashMap<String,String>();
+                            lineupuploadData.put("Player Name",player.PlayerName);
+                            lineupuploadData.put("jersey Number",player.JerseyNumber);
+                            ResultsPageReference.child("Lineups").child("Team A").push().setValue(lineupuploadData);
+                        }
+                        for(Player player : lineupteamB){
+                            Map<String,String> lineupuploadData=  new HashMap<String,String>();
+                            lineupuploadData.put("Player Name",player.PlayerName);
+                            lineupuploadData.put("jersey Number",player.JerseyNumber);
+                            ResultsPageReference.child("Lineups").child("Team B").push().setValue(lineupuploadData);
                         }
                         //Uploading the Data To The Results Page Complete
 

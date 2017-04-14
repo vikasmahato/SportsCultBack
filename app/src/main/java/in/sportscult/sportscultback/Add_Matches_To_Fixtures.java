@@ -81,7 +81,7 @@ public class Add_Matches_To_Fixtures extends AppCompatActivity {
                     public void onDateSet(DatePicker view, int year,
                                           int monthOfYear, int dayOfMonth) {
 
-                        Date_Fixture.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                        Date_Fixture.setText(Interface.formatDate(dayOfMonth,monthOfYear+1,year));
                     }
                 }, mYear, mMonth, mDay);
         datePickerDialog.show();
@@ -114,7 +114,13 @@ public class Add_Matches_To_Fixtures extends AppCompatActivity {
                         } else {
                             format = "AM";
                         }
-                        Time_Fixture.setText(new StringBuilder().append(hourOfDay).append(":").append(minute)
+                        String hourOfDayString = hourOfDay+"";
+                        String minuteString = minute+"";
+                        if(hourOfDay<10)
+                            hourOfDayString = "0"+hourOfDay;
+                        if(minute<10)
+                            minuteString = "0"+minute;
+                        Time_Fixture.setText(new StringBuilder().append(hourOfDayString).append(":").append(minuteString)
                                 .append(" ").append(format));
                     }
                 }, mHour, mMinute, false);
