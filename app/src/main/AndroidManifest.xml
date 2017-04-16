@@ -16,23 +16,33 @@
         <activity
             android:name=".Interface"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"/>
         <activity android:name=".Fixture_Editing_Page" />
-        <activity android:name=".Add_Live_Matches" />
-        <activity android:name=".Add_Matches_To_Fixtures" />
-        <activity android:name=".LiveMatchInformationFeeder" />
-        <activity android:name=".CallRequests" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".LiveMatches" />
-        <activity android:name=".RegistrationActivity" />
-        <activity android:name=".SplashPermissionsActivity">
+        <activity android:name=".Add_Live_Matches"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Add_Matches_To_Fixtures"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".LiveMatchInformationFeeder"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".CallRequests"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".LoginActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".LiveMatches"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".RegistrationActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".SplashPermissionsActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddLineup"></activity>
+        <activity android:name=".AddLineup"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
