@@ -632,13 +632,13 @@ public class LiveMatchInformationFeeder extends AppCompatActivity {
                         for(Player player : lineupteamA){
                             Map<String,String> lineupuploadData=  new HashMap<String,String>();
                             lineupuploadData.put("Player Name",player.PlayerName);
-                            lineupuploadData.put("jersey Number",player.JerseyNumber);
+                            lineupuploadData.put("Jersey Number",player.JerseyNumber);
                             ResultsPageReference.child("Lineups").child("Team A").push().setValue(lineupuploadData);
                         }
                         for(Player player : lineupteamB){
                             Map<String,String> lineupuploadData=  new HashMap<String,String>();
                             lineupuploadData.put("Player Name",player.PlayerName);
-                            lineupuploadData.put("jersey Number",player.JerseyNumber);
+                            lineupuploadData.put("Jersey Number",player.JerseyNumber);
                             ResultsPageReference.child("Lineups").child("Team B").push().setValue(lineupuploadData);
                         }
                         //Uploading the Data To The Results Page Complete
