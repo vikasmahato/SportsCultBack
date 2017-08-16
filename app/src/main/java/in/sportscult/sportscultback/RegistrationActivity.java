@@ -55,7 +55,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private static Player_List_Adapter player_list_adapter;
     private static ProgressDialog progressDialog;
     //Provide the minimum number of permissable team members in a team
-    private static final int minimum_number_of_players = 7;
+    private static final int minimum_number_of_players = 3;
     private static final int PROFILE_PIC_ACCESS = 1001;
     private static final String[] age_group_codes = {"0","A","B","C","D"};
 
@@ -145,10 +145,12 @@ public class RegistrationActivity extends AppCompatActivity {
 
                 //Image uri is already present in the variable id_proof_scan_uri
 
-                if(player_contact.length()<6 || player_name.length()==0 || player_jersey.length()<1){
+                if(player_name.length()==0 || player_jersey.length()<1){
                 }
                 else{
 
+                    if(playercontact.length()==0)
+                        playercontact = "Contact Not Set";
                     //Now add all the data to the list view data set
                     names_of_players.add(playername);
                     contact_of_players.add(playercontact);
@@ -242,27 +244,33 @@ public class RegistrationActivity extends AppCompatActivity {
                     databaseReference1 = FirebaseDatabase.getInstance().getReference().child(age_group).child("Team Names").child(team_name);
 
                     //Add Team Details
-                    storageReference = FirebaseStorage.getInstance().getReference().child(age_group).child(team_name);
-                    //Add Team Profile Pic
+                    if(profile_pic_uri==null){
+                        databaseReference1.child("Team Profile Pic Thumbnail Url").setValue("Not Set");
+                        databaseReference1.child("Team Profile Pic Url").setValue("Not Set");
+                    }
+                    else{
+                        storageReference = FirebaseStorage.getInstance().getReference().child(age_group).child(team_name);
+                        //Add Team Profile Pic
 
-                    //Generate thumbnail and save it and its download url
-                    byte[] thumbnailForProfilePic = generateThumbnailForImage(profile_pic_uri);
-                    storageReference.child("Team Profile Pic Thumbnail").putBytes(thumbnailForProfilePic).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            Uri downloadUri = taskSnapshot.getDownloadUrl();
-                            databaseReference1.child("Team Profile Pic Thumbnail Url").setValue(downloadUri.toString());
-                        }
-                    });
+                        //Generate thumbnail and save it and its download url
+                        byte[] thumbnailForProfilePic = generateThumbnailForImage(profile_pic_uri);
+                        storageReference.child("Team Profile Pic Thumbnail").putBytes(thumbnailForProfilePic).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                Uri downloadUri = taskSnapshot.getDownloadUrl();
+                                databaseReference1.child("Team Profile Pic Thumbnail Url").setValue(downloadUri.toString());
+                            }
+                        });
 
-                    //Save image and its download url
-                    storageReference.child("Team Profile Pic").putFile(profile_pic_uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            Uri downloadUri = taskSnapshot.getDownloadUrl();
-                            databaseReference1.child("Team Profile Pic Url").setValue(downloadUri.toString());
-                        }
-                    });
+                        //Save image and its download url
+                        storageReference.child("Team Profile Pic").putFile(profile_pic_uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                Uri downloadUri = taskSnapshot.getDownloadUrl();
+                                databaseReference1.child("Team Profile Pic Url").setValue(downloadUri.toString());
+                            }
+                        });
+                    }
 
                     databaseReference = FirebaseDatabase.getInstance().getReference().child(age_group).child("Team Description").child(team_name);
                     Map<String,String> teamData = new HashMap<String, String>();
@@ -368,12 +376,12 @@ public class RegistrationActivity extends AppCompatActivity {
             focus = reg_team_name;
             verification_success = false;
         }
-        if(profile_pic_uri==null){
-            Toast.makeText(RegistrationActivity.this,"Please Select A Team Profile Pic",Toast.LENGTH_LONG).show();
-            verification_success = false;
-            if(focus==null)
-                focus = reg_team_name;
-        }
+//        if(profile_pic_uri==null){
+//            Toast.makeText(RegistrationActivity.this,"Please Select A Team Profile Pic",Toast.LENGTH_LONG).show();
+//            verification_success = false;
+//            if(focus==null)
+//                focus = reg_team_name;
+//        }
         if(verification_success && names_of_players.size()<minimum_number_of_players){
             Toast.makeText(RegistrationActivity.this,("You need to add atleast "+(minimum_number_of_players-names_of_players.size())+" more players."),Toast.LENGTH_LONG).show();
             verification_success = false;
